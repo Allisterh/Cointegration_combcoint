@@ -1,2 +1,7 @@
 .Rproj.user
 inst/doc
+
+# History files
+.Rhistory
+.Rapp.history
+
