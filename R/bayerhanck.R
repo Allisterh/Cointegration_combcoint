@@ -114,10 +114,17 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
   # degrees of freedom
   k <- nvar - 1
 
-  #### hier dann p-value function
+  # Estimate p-Value
+  if(identical(test, "eg-j")) test <- "E_J"
+
+  bh.pval <- get_p_value(bh.test = bh.test,
+                         trendtype = trendtype,
+                         test.type = test,
+                         k = k)
 
   # ---- Display Results ----
   out <- list(bh.test = bh.test,
+              bh.pval = bh.pval,
               test.stat = test.stat[complete.cases(test.stat)],
               pval.stat = pval.stat[complete.cases(test.stat)],
               formula = formula,
@@ -125,7 +132,7 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
               trend = trend,
               nvar = nvar,
               test.type = test,
-              K = n_var,
+              K = k,
               basecase = basecase)
   class(out) <- c("bh.test", "list")
   cat(c("----------------------------------------------------------",
