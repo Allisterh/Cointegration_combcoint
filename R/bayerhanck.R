@@ -11,7 +11,6 @@
 #' @param test Selection of tests to choose from. Choices are either "eg-j", for \code{\link{englegranger}}
 #' and \code{\link{johansen}}, or "all", for \code{\link{englegranger}}, \code{\link{johansen}},
 #' \code{\link{banerjee}} and \code{\link{boswijk}}.
-#' @param crit Level for the critical value of the test to be reported.
 #'
 #' @return \code{bayerhanck} returns an object of classes \code{"bh.test"} and \code{"list"}.
 #'
@@ -25,20 +24,19 @@
 #' @examples
 #' data("mts-examples", package="MTS")
 #' bayerhanck(sp ~ ibm + ko, data = ibmspko)
-bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all", crit = 0.05) {
+bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
 
-  #-----------------------------------------------------------------------------------------
-  # Check Syntax
-  #-----------------------------------------------------------------------------------------
+
+  # ---- Check Syntax ----
   mf <- match.call()
   m <- match(c("formula", "data"), names(mf), 0L)
-  if (is.null(data))
+  if (is.null(data) | is.null(formula))
     stop()
+  data <- na.omit(data)
   mf <- mf[c(1L, m)]
   mf[[1L]] <- quote(stats::model.frame)
   mf <- eval(mf, parent.frame())
   mt <- attr(mf, "terms")
-  mf <- na.omit(mf)
   y <- model.response(mf, "numeric")
   x <- model.matrix(mt, mf)[, -1]
   nvar <- ncol(cbind(y, x))
@@ -46,18 +44,14 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all", c
                      choices = c("none", "const", "trend"))
   test <- match.arg(test,
                     choices = c("eg-j", "all"))
-  crit <- match.arg(as.character(crit),
-                    c(0.01, 0.05, 0.10))
+
 
   lag <- lags
   if (lag < 0)
-    stop("Lags must be set to a non negative value.")
-  if (crit < 0)
-    stop("Level of critical value must be set to a non negative.")
+    stop("Lags must be set to a non-negative value.")
 
-    #-----------------------------------------------------------------------------------------
-  # Code trendtypes
-  #-----------------------------------------------------------------------------------------
+
+  # ---- Code trendtypes ----
   if (identical(trend, "none")){
     ending = -1
     trendtype = 1
@@ -69,9 +63,8 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all", c
     trendtype = 3
   }
 
-  #-----------------------------------------------------------------------------------------
-  # Call Tests
-  #-----------------------------------------------------------------------------------------
+
+  # ---- Call Tests ----
   test.stat <- rep(NA, 4)
   names(test.stat) <- c("Engle-Granger", "Johansen", "Banerjee", "Boswijk")
 
@@ -91,10 +84,8 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all", c
   test.stat <- test.stat
   pval.stat <- test.stat
 
-  #-----------------------------------------------------------------------------------------
-  # Obtain P-Values
-  #-----------------------------------------------------------------------------------------
 
+  # ---- Obtain P-Values ----
   N <- nrow(null_dist)
 
   basecase <- 44 * (trendtype - 1) + 4 * (nvar - 2)
@@ -112,27 +103,8 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all", c
     }
   }
 
-  #-----------------------------------------------------------------------------------------
-  # Calculate Bayer-Hanck Fisher Statistics
-  #-----------------------------------------------------------------------------------------
 
-  #### Select matrices of critical value ####
-
-  if (identical(crit, 0.01)){
-    crit_val_1 <- crit_val_1_0.01
-    crit_val_2 <- crit_val_2_0.01
-  }
-
-  if (identical(crit, 0.05)){
-    crit_val_1 <- crit_val_1_0.05
-    crit_val_2 <- crit_val_2_0.05
-  }
-
-  if (identical(crit, 0.10)){
-    crit_val_1 <- crit_val_1_0.10
-    crit_val_2 <- crit_val_2_0.10
-  }
-
+  # ---- Calculate Bayer-Hanck Fisher Statistics ----
   #### compute statistics ####
   if (identical(test, "eg-j"))
     bh.test <- -2*sum(log(pval.stat[1:2]))
@@ -140,38 +112,27 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all", c
     bh.test <- -2*sum(log(pval.stat[1:4]))
 
   # degrees of freedom
-  n_var <- nvar - 1
+  k <- nvar - 1
 
-  ### obtain critical Value
-  if (identical(test, "eg-j"))
-    crit.val <- crit_val_1[n_var, trendtype]
-  if (identical(test, "all"))
-    crit.val <- crit_val_2[n_var, trendtype]
+  #### hier dann p-value function
 
-  #-----------------------------------------------------------------------------------------
-  # Display Results
-  #-----------------------------------------------------------------------------------------
+  # ---- Display Results ----
   out <- list(bh.test = bh.test,
               test.stat = test.stat[complete.cases(test.stat)],
               pval.stat = pval.stat[complete.cases(test.stat)],
-              crit.val = crit.val,
               formula = formula,
               lags = lags,
               trend = trend,
-              crit = crit,
               nvar = nvar,
               test.type = test,
               K = n_var,
-              bh.crit.val = crit.val,
               basecase = basecase)
   class(out) <- c("bh.test", "list")
   cat(c("----------------------------------------------------------",
         "Bayer-Hanck Test for Non-Cointegration",
         "----------------------------------------------------------",
         paste(c("Value of the Fisher Type Test statistic:", round(bh.test, 4)),
-              collapse = " "),
-      paste(c("Critical" ,round(crit*100, 0) ,"% Value of the Fisher Type Test:", round(crit.val, 4)),
-            collapse = " ")),
+              collapse = " ")),
       sep = "\n")
   invisible(out)
 }

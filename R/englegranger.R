@@ -25,23 +25,21 @@
 #' englegranger(sp ~ ibm + ko, data = ibmspko)
 englegranger <- function(formula, data, lags = 1, trend = "const"){
 
-  #-----------------------------------------------------------------------------------------
-  # Check Syntax
-  #-----------------------------------------------------------------------------------------
+  # ---- Check Syntax ----
   mf <- match.call()
   m <- match(c("formula", "data"), names(mf), 0L)
+  if (is.null(data) | is.null(formula))
+    stop()
   mf <- mf[c(1L, m)]
   mf[[1L]] <- quote(stats::model.frame)
   mf <- eval(mf, parent.frame())
-  mt <- attr(mf, "terms")
   mf <- na.omit(mf)
   y <- model.response(mf, "numeric")
   trend <- match.arg(trend,
                      choices = c("none", "const", "trend"))
 
-  #-----------------------------------------------------------------------------------------
-  # Trend Specification
-  #-----------------------------------------------------------------------------------------
+
+  # ---- Trend Specification ----
   if (identical(trend, "none")){
     eg_lm <- lm(update(formula, ~. -1), data = data, na.action = na.omit)
   } else if (identical(trend, "const")) {
@@ -53,9 +51,8 @@ englegranger <- function(formula, data, lags = 1, trend = "const"){
     data <- data[, -which(colnames(data) == "tr")]
   }
 
-  #-----------------------------------------------------------------------------------------
-  # Engle Granger Test
-  #-----------------------------------------------------------------------------------------
+
+  # ---- Engle Granger Test ----
   eg_res <- eg_lm$residuals
   eg_adf <- urca::ur.df(eg_res, lags = lags)
   test.stat <- as.numeric(eg_adf@teststat)

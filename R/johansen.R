@@ -2,9 +2,8 @@
 #' @export
 johansen <- function(formula, data, type = "eigen", lags = 1, trend = "const"){
 
-  #-----------------------------------------------------------------------------------------
-  # Check Syntax
-  #-----------------------------------------------------------------------------------------
+  # ---- Check Syntax ----
+
   mf <- match.call()
   m <- match(c("formula", "data"), names(mf), 0L)
   if (is.null(data))
@@ -27,9 +26,8 @@ johansen <- function(formula, data, type = "eigen", lags = 1, trend = "const"){
   if (lag < 0)
     stop("Lags must be set to a non negative value.")
 
-  #-----------------------------------------------------------------------------------------
-  # Johansen Test
-  #-----------------------------------------------------------------------------------------
+
+  # ---- Johansen Test ----
   if (identical(trend, "trend"))
     trend = "both"
 

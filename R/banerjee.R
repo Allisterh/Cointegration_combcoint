@@ -2,9 +2,7 @@
 #' @export
 banerjee <- function(formula, data, lags = 1, trend = "const"){
 
-  #-----------------------------------------------------------------------------------------
-  # Check Syntax
-  #-----------------------------------------------------------------------------------------
+  # ---- Check Syntax ----
   mf <- match.call()
   m <- match(c("formula", "data"), names(mf), 0L)
   if (is.null(data))
@@ -23,9 +21,8 @@ banerjee <- function(formula, data, lags = 1, trend = "const"){
   if (lag < 0)
     stop("Lags must be set to a non negative value.")
 
-  #-----------------------------------------------------------------------------------------
-  # Lag Matrix
-  #-----------------------------------------------------------------------------------------
+
+  # ---- Lag Matrix ----
   Xlag <- cbind(y, x)
   Y_dif <- diff(y) # muss als numeric vorliegen
   W <- diff(x)
@@ -44,10 +41,8 @@ banerjee <- function(formula, data, lags = 1, trend = "const"){
     W <- cbind(W, lag_vec)
   }
 
-  #-----------------------------------------------------------------------------------------
-  # Banerjee Test
-  #-----------------------------------------------------------------------------------------
 
+  # ---- Banerjee Test ----
   res <- matrix(NA, nrow = nrow(Xlag) - lags - 1, ncol = ncol(Xlag))
 
   if (identical(trend, "none")) {
