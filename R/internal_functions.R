@@ -130,7 +130,7 @@ get_p_value <- function(bh.test, trendtype, test.type, k, ...){
     dep_var <- get_p_trans(model) %>% as.character()
 
     # generating data set
-    new_data <- tibble(dep = 1L,
+    new_data <- tibble::tibble(dep = 1L,
                        stat_Fisher_all_bc = ((bh.test^lambda_stat)-1)/lambda_stat,
                        stat_Fisher_E_J_bc = ((bh.test^lambda_stat)-1)/lambda_stat,
                        k_dummy = as.factor(k))
@@ -146,4 +146,10 @@ get_p_value <- function(bh.test, trendtype, test.type, k, ...){
   }
 
   return(p.value)
+}
+
+get_p_trans <- function(model){
+  model %>%
+    purrr::pluck('formula') %>%
+    purrr::pluck(2)
 }

@@ -16,7 +16,7 @@ bayerhanck(formula, data, lags = 1, trend = "const", test = "all")
 \item{trend}{Type of deterministic component to be included, "none" for no deterministic,
 "const" for a constant and "trend" for a constant plus trend.}
 
-\item{test}{Selection of tests to choose from. Choices are either "eg-j", for \code{\link{englegranger}}
+\item{test}{Selection of tests to choose from. Choices are either "ej", for \code{\link{englegranger}}
 and \code{\link{johansen}}, or "all", for \code{\link{englegranger}}, \code{\link{johansen}},
 \code{\link{banerjee}} and \code{\link{boswijk}}.}
 }

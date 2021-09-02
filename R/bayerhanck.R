@@ -8,7 +8,7 @@
 #' @param lags Number of lags to be included.
 #' @param trend Type of deterministic component to be included, "none" for no deterministic,
 #' "const" for a constant and "trend" for a constant plus trend.
-#' @param test Selection of tests to choose from. Choices are either "eg-j", for \code{\link{englegranger}}
+#' @param test Selection of tests to choose from. Choices are either "ej", for \code{\link{englegranger}}
 #' and \code{\link{johansen}}, or "all", for \code{\link{englegranger}}, \code{\link{johansen}},
 #' \code{\link{banerjee}} and \code{\link{boswijk}}.
 #'
@@ -43,7 +43,7 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
   trend <- match.arg(trend,
                      choices = c("none", "const", "trend"))
   test <- match.arg(test,
-                    choices = c("eg-j", "all"))
+                    choices = c("ej", "all"))
 
 
   lag <- lags
@@ -69,7 +69,7 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
   names(test.stat) <- c("Engle-Granger", "Johansen", "Banerjee", "Boswijk")
 
   invisible(capture.output(
-  if (identical(test, "eg-j"))
+  if (identical(test, "ej"))
     test.stat[1:2] <- c(englegranger(formula = formula, data = data, lags = lags, trend = trend)$test.stat,
                         johansen(formula = formula, data = data, lags = lags, trend = trend)$test.stat)
   ))
@@ -106,7 +106,7 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
 
   # ---- Calculate Bayer-Hanck Fisher Statistics ----
   #### compute statistics ####
-  if (identical(test, "eg-j"))
+  if (identical(test, "ej"))
     bh.test <- -2*sum(log(pval.stat[1:2]))
   if (identical(test, "all"))
     bh.test <- -2*sum(log(pval.stat[1:4]))
@@ -115,7 +115,7 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
   k <- nvar - 1
 
   # Estimate p-Value
-  if(identical(test, "eg-j")) test <- "E_J"
+  if(identical(test, "ej")) test <- "E_J"
 
   bh.pval <- get_p_value(bh.test = bh.test,
                          trendtype = trendtype,
@@ -130,15 +130,15 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
               formula = formula,
               lags = lags,
               trend = trend,
-              nvar = nvar,
               test.type = test,
-              K = k,
-              basecase = basecase)
+              k = k)
   class(out) <- c("bh.test", "list")
   cat(c("----------------------------------------------------------",
         "Bayer-Hanck Test for Non-Cointegration",
         "----------------------------------------------------------",
-        paste(c("Value of the Fisher Type Test statistic:", round(bh.test, 4)),
+        paste(c("Test statistic:", round(bh.test, 4)),
+              collapse = " "),
+        paste(c("p-Value:", round(bh.pval, 4)),
               collapse = " ")),
       sep = "\n")
   invisible(out)
