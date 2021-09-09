@@ -26,7 +26,7 @@ model.frame.fastLm <- function (formula, ...) {
 
 #' Construct Design Matrices
 #'
-#' @param
+#' @param object
 #' @param ...
 #'
 #' @noRd
@@ -112,7 +112,6 @@ get_critical_val <- function(trendtype, k_s, test){
 #' @noRd
 #'
 get_p_value <- function(bh.test, trendtype, test.type, k, ...){
-  # trendtype = case
 
   # getting critical val
   crit_val <- get_critical_val(trendtype, k, test.type)
@@ -148,6 +147,13 @@ get_p_value <- function(bh.test, trendtype, test.type, k, ...){
   return(p.value)
 }
 
+
+#' Extract Response Name
+#'
+#' @param model
+#'
+#' @noRd
+#'
 get_p_trans <- function(model){
   model %>%
     purrr::pluck('formula') %>%

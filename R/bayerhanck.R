@@ -32,13 +32,13 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
   m <- match(c("formula", "data"), names(mf), 0L)
   if (is.null(data) | is.null(formula))
     stop()
-  data <- na.omit(data)
+  data <- stats::na.omit(data)
   mf <- mf[c(1L, m)]
   mf[[1L]] <- quote(stats::model.frame)
   mf <- eval(mf, parent.frame())
   mt <- attr(mf, "terms")
-  y <- model.response(mf, "numeric")
-  x <- model.matrix(mt, mf)[, -1]
+  y <- stats::model.response(mf, "numeric")
+  x <- stats::model.matrix(mt, mf)[, -1]
   nvar <- ncol(cbind(y, x))
   trend <- match.arg(trend,
                      choices = c("none", "const", "trend"))
@@ -68,12 +68,12 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
   test.stat <- rep(NA, 4)
   names(test.stat) <- c("Engle-Granger", "Johansen", "Banerjee", "Boswijk")
 
-  invisible(capture.output(
+  invisible(utils::capture.output(
   if (identical(test, "ej"))
     test.stat[1:2] <- c(englegranger(formula = formula, data = data, lags = lags, trend = trend)$test.stat,
                         johansen(formula = formula, data = data, lags = lags, trend = trend)$test.stat)
   ))
-  invisible(capture.output(
+  invisible(utils::capture.output(
   if (identical(test, "all"))
     test.stat[1:4] <- c(englegranger(formula = formula, data = data, lags = lags, trend = trend)$test.stat,
                         johansen(formula = formula, data = data, lags = lags, trend = trend)$test.stat,
@@ -125,8 +125,8 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
   # ---- Display Results ----
   out <- list(bh.test = bh.test,
               bh.pval = bh.pval,
-              test.stat = test.stat[complete.cases(test.stat)],
-              pval.stat = pval.stat[complete.cases(test.stat)],
+              test.stat = test.stat[stats::complete.cases(test.stat)],
+              pval.stat = pval.stat[stats::complete.cases(test.stat)],
               formula = formula,
               lags = lags,
               trend = trend,

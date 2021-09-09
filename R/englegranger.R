@@ -33,21 +33,21 @@ englegranger <- function(formula, data, lags = 1, trend = "const"){
   mf <- mf[c(1L, m)]
   mf[[1L]] <- quote(stats::model.frame)
   mf <- eval(mf, parent.frame())
-  mf <- na.omit(mf)
-  y <- model.response(mf, "numeric")
+  mf <- stats::na.omit(mf)
+  y <- stats::model.response(mf, "numeric")
   trend <- match.arg(trend,
                      choices = c("none", "const", "trend"))
 
 
   # ---- Trend Specification ----
   if (identical(trend, "none")){
-    eg_lm <- lm(update(formula, ~. -1), data = data, na.action = na.omit)
+    eg_lm <- stats::lm(stats::update(formula, ~. -1), data = data, na.action = stats::na.omit)
   } else if (identical(trend, "const")) {
-    eg_lm <- lm(formula, data = data, na.action = na.omit)
+    eg_lm <- stats::lm(formula, data = data, na.action = stats::na.omit)
   } else if (identical(trend, "trend")){
     tr <- seq_along(y)
     data$tr <- tr
-    eg_lm <- lm(update(formula, ~. + tr), data = data, na.action = na.omit)
+    eg_lm <- stats::lm(stats::update(formula, ~. + tr), data = data, na.action = stats::na.omit)
     data <- data[, -which(colnames(data) == "tr")]
   }
 
