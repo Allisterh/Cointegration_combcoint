@@ -26,7 +26,7 @@ model.frame.fastLm <- function (formula, ...) {
 
 #' Construct Design Matrices
 #'
-#' @param object
+#' @param object a model of class \code{\link[fastLm]{fastLm}}
 #' @param ...
 #'
 #' @noRd
