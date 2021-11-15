@@ -48,6 +48,25 @@ model.matrix.fastLm <- function (object, ...) {
   }
 }
 
+
+#' Extract Lambda
+#'
+#' @param data
+#' @param case_w
+#' @param art
+#' @param test_w
+#'
+#' @noRd
+#'
+get_lambda <- function(data, case_w, art, test_w){
+  data %>%
+    dplyr::filter(case == case_w,
+                  test.type == test_w) %>%
+    dplyr::select(all_of(art)) %>%
+    dplyr::pull()
+}
+
+
 #' Extract Model
 #'
 #' @param trendtype
@@ -93,13 +112,6 @@ get_critical_val <- function(trendtype, k_s, test){
 #' @noRd
 #'
 get_p_value <- function(bh.test, trendtype, test.type, k, ...){
-  get_lambda <- function(data, case_w, art, test_w){
-    data %>%
-      dplyr::filter(case == case_w,
-                    test.type == test_w) %>%
-      dplyr::select(all_of(art)) %>%
-      dplyr::pull()
-  }
 
   # getting critical val
   crit_val <- get_critical_val(trendtype, k, test.type)

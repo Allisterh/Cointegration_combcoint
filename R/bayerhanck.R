@@ -1,6 +1,6 @@
 #' Joint Test-Statistic for the Null of Non-Cointegration
 #'
-#' The Test by Bayer and Hanck produces a joint test-statistic for the null of non-cointegration, by aggregating
+#' Produces a joint test-statistic for the null of non-cointegration, aggregating
 #' various cointegration tests.
 #'
 #' @param formula An object of class \code{\link[stats]{formula}} to describe the model.
