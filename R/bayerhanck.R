@@ -32,7 +32,6 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
   m <- match(c("formula", "data"), names(mf), 0L)
   if (is.null(data) | is.null(formula))
     stop()
-  data <- stats::na.omit(data)
   mf <- mf[c(1L, m)]
   mf[[1L]] <- quote(stats::model.frame)
   mf <- eval(mf, parent.frame())
