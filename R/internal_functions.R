@@ -49,59 +49,6 @@ model.matrix.fastLm <- function (object, ...) {
 }
 
 
-#' Extract Lambda
-#'
-#' @param data
-#' @param case_w
-#' @param art
-#' @param test_w
-#'
-#' @noRd
-#'
-get_lambda <- function(data, case_w, art, test_w){
-  data %>%
-    dplyr::filter(case == case_w,
-                  test.type == test_w) %>%
-    dplyr::select(all_of(art)) %>%
-    dplyr::pull()
-}
-
-
-#' Extract Model
-#'
-#' @param trendtype
-#' @param test
-#'
-#' @noRd
-#'
-get_model <- function(trendtype, test){
-  models %>%
-    dplyr::filter(case == trendtype,
-                  test.type == test) %>%
-    dplyr::select(model) %>%
-    dplyr::pull() %>%
-    purrr::pluck(1)
-}
-
-
-#' Get critical Value
-#'
-#' @param trendtype
-#' @param k_s
-#' @param test
-#'
-#' @noRd
-#'
-get_critical_val <- function(trendtype, k_s, test){
-  models %>%
-    dplyr::filter(case == trendtype,
-                  test.type == test) %>%
-    tidyr::unnest(critical) %>%
-    dplyr::filter(k == k_s) %>%
-    dplyr::pull(crit_val)
-}
-
-
 #' Predict p-Value from Test Statistic
 #'
 #' @param bh.test
@@ -112,6 +59,37 @@ get_critical_val <- function(trendtype, k_s, test){
 #' @noRd
 #'
 get_p_value <- function(bh.test, trendtype, test.type, k, ...){
+  get_lambda <- function(data, case_w, art, test_w){
+    data %>%
+      dplyr::filter(case == case_w,
+                    test.type == test_w) %>%
+      dplyr::select(all_of(art)) %>%
+      dplyr::pull()
+  }
+
+  get_model <- function(trendtype, test){
+    models %>%
+      dplyr::filter(case == trendtype,
+                    test.type == test) %>%
+      dplyr::select(model) %>%
+      dplyr::pull() %>%
+      purrr::pluck(1)
+  }
+
+  get_critical_val <- function(trendtype, k_s, test){
+    models %>%
+      dplyr::filter(case == trendtype,
+                    test.type == test) %>%
+      tidyr::unnest(critical) %>%
+      dplyr::filter(k == k_s) %>%
+      dplyr::pull(crit_val)
+  }
+
+  get_p_trans <- function(model){
+    model %>%
+      purrr::pluck('formula') %>%
+      purrr::pluck(2)
+  }
 
   # getting critical val
   crit_val <- get_critical_val(trendtype, k, test.type)
@@ -147,15 +125,3 @@ get_p_value <- function(bh.test, trendtype, test.type, k, ...){
   return(p.value)
 }
 
-
-#' Extract Response Name
-#'
-#' @param model
-#'
-#' @noRd
-#'
-get_p_trans <- function(model){
-  model %>%
-    purrr::pluck('formula') %>%
-    purrr::pluck(2)
-}
