@@ -29,10 +29,10 @@ johansen(formula, data, type = "eigen", lags = 1, trend = "const")
 \item{type}{Test to be conducted, either "eigen" or "trace".}
 }
 \value{
-Returns an object of classes \code{"co.test"} and \code{"list"}.
+Returns an object of class \code{"list"}.
 }
 \description{
-Executes Cointegration Tests, which serve as underlying Tests for the Bayer-Hanck Fisher Type Statistic.
+Executes common cointegration tests, which serve as underlying tests for the Bayer Hanck Test statistic.
 }
 \section{Functions}{
 \itemize{

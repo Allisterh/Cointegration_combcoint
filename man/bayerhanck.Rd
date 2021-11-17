@@ -13,7 +13,7 @@ bayerhanck(formula, data, lags = 1, trend = "const", test = "all")
 
 \item{lags}{Number of lags to be included.}
 
-\item{trend}{Type of deterministic component to be included, "none" for no deterministic,
+\item{trend}{Type of deterministic component to be included. "none" for no deterministic,
 "const" for a constant and "trend" for a constant plus trend.}
 
 \item{test}{Selection of tests to choose from. Choices are either "ej", for \code{\link{englegranger}}
@@ -21,10 +21,17 @@ and \code{\link{johansen}}, or "all", for \code{\link{englegranger}}, \code{\lin
 \code{\link{banerjee}} and \code{\link{boswijk}}.}
 }
 \value{
-\code{bayerhanck} returns an object of classes \code{"bh.test"} and \code{"list"}.
+\code{bayerhanck} returns an object of classes \code{"bhtest"} and \code{"list"}.
 
-The function \code{summary} is used to print a summary, whereas the cumulative distribution
-under the null hypothesis can be plotted with \code{plot}.
+The function \code{summary} is used to print a summary, which includes the test statistics and p-values
+for the underlying tests, as well as the test statistic and p-value for the Bayer Hanck Test.
+
+An object of class \code{"bhtest"} is a \code{"list"} containing, inter alia, the components:
+
+\item{bh.test}{the test statistic of the Bayer Hanck Test}
+\item{bh.pval}{the p-Value of the Bayer Hanck Test}
+\item{test.stat}{the test statistic of the underlying tests}
+\item{pval.stat}{the p-values of the underlying tests}
 }
 \description{
 Produces a joint test-statistic for the null of non-cointegration, aggregating

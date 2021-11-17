@@ -1,6 +1,6 @@
 #' Cointegration Tests
 #'
-#' Executes Cointegration Tests, which serve as underlying Tests for the Bayer-Hanck Fisher Type Statistic.
+#' Executes common cointegration tests, which serve as underlying tests for the Bayer Hanck Test statistic.
 #'
 #' @param formula An object of class \code{\link[stats]{formula}} to describe the model.
 #' @param data An optional data frame containing the variables in the model.
@@ -9,7 +9,7 @@
 #' "const" for a constant and "trend" for a constant plus trend.
 #' @param type Test to be conducted, either "eigen" or "trace".
 #'
-#' @return Returns an object of classes \code{"co.test"} and \code{"list"}.
+#' @return Returns an object of class \code{"list"}.
 #' @export
 #'
 #' @references Engle, R. and Granger, C. (1987), Co-integration and Error Correction: Representation, Estimation, and Testing, Econometrica 55(2), 251-76.
@@ -62,11 +62,10 @@ englegranger <- function(formula, data, lags = 1, trend = "const"){
               trend = trend,
               test = "Engle-Granger",
               formula = formula)
-  class(out) <- c("co.test", "list")
   cat(c("----------------------------------------------------------",
         "Engle-Granger Test",
         "----------------------------------------------------------",
-        paste(c("Value of test statistic:", round(test.stat, 4)), collapse = " ")),
+        paste(c("Test statistic:", round(test.stat, 4)), collapse = " ")),
         sep = "\n")
   invisible(out)
 }

@@ -6,16 +6,24 @@
 #' @param formula An object of class \code{\link[stats]{formula}} to describe the model.
 #' @param data An optional data frame containing the variables in the model.
 #' @param lags Number of lags to be included.
-#' @param trend Type of deterministic component to be included, "none" for no deterministic,
+#' @param trend Type of deterministic component to be included. "none" for no deterministic,
 #' "const" for a constant and "trend" for a constant plus trend.
 #' @param test Selection of tests to choose from. Choices are either "ej", for \code{\link{englegranger}}
 #' and \code{\link{johansen}}, or "all", for \code{\link{englegranger}}, \code{\link{johansen}},
 #' \code{\link{banerjee}} and \code{\link{boswijk}}.
 #'
-#' @return \code{bayerhanck} returns an object of classes \code{"bh.test"} and \code{"list"}.
+#' @return \code{bayerhanck} returns an object of classes \code{"bhtest"} and \code{"list"}.
 #'
-#' The function \code{summary} is used to print a summary, whereas the cumulative distribution
-#' under the null hypothesis can be plotted with \code{plot}.
+#' The function \code{summary} is used to print a summary, which includes the test statistics and p-values
+#' for the underlying tests, as well as the test statistic and p-value for the Bayer Hanck Test.
+#'
+#' An object of class \code{"bhtest"} is a \code{"list"} containing, inter alia, the components:
+#'
+#'\item{bh.test}{the test statistic of the Bayer Hanck Test}
+#'\item{bh.pval}{the p-Value of the Bayer Hanck Test}
+#'\item{test.stat}{the test statistic of the underlying tests}
+#'\item{pval.stat}{the p-values of the underlying tests}
+#'
 #'
 #' @export
 #'
@@ -131,14 +139,7 @@ bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
               trend = trend,
               test.type = test,
               k = k)
-  class(out) <- c("bh.test", "list")
-  cat(c("----------------------------------------------------------",
-        "Bayer-Hanck Test for Non-Cointegration",
-        "----------------------------------------------------------",
-        paste(c("Test statistic:", round(bh.test, 4)),
-              collapse = " "),
-        paste(c("p-Value:", round(bh.pval, 4)),
-              collapse = " ")),
-      sep = "\n")
+  class(out) <- c("bhtest", "list")
+  print(out)
   invisible(out)
 }
