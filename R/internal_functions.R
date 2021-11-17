@@ -51,10 +51,10 @@ model.matrix.fastLm <- function (object, ...) {
 
 #' Predict p-Value from Test Statistic
 #'
-#' @param bh.test
-#' @param trendtype
-#' @param test.type
-#' @param k
+#' @param bh.test The value of the test statistic of the Bayer Hanck Test
+#' @param trendtype Type of deterministic component
+#' @param test.type Selection of tests to choose from
+#' @param k degrees of freedom - 1
 #'
 #' @noRd
 #'
