@@ -13,15 +13,15 @@ summary.bhtest <- function(object, ...) {
       "Underlying Tests:"),
     sep = "\n")
   test.mat <- rbind(round(object$test.stat, 4),
-                              round(object$pval.stat, 4))
+                    object$pval.stat
+                    )
   rownames(test.mat) <- c("Test Statistics", "p-Values")
   print(test.mat)
   cat(c(" ",
         paste(c("Value of the Bayer Hanck Test statistic:", round(object$bh.test, 4)),
               collapse = " ")),
       sep = "\n")
-  cat(paste(c("p-Value:", round(object$bh.pval, 4)),
-              collapse = " "),
+  cat(ifelse(object$bh.pval <= 1e-12, paste(c("p-Value: <", object$bh.pval), collapse = ""), paste(c("p-Value:", round(object$bh.pval, 4)), collapse = " ")),
       sep = "\n")
   out <- list(bh.test = object$bh.test)
   class(out) <- c("summary.bh.test")
