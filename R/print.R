@@ -5,7 +5,8 @@ print.bhtest <- function(x, ...) {
         "----------------------------------------------------------",
         paste(c("Test statistic:", round(x$bh.test, 4)),
               collapse = " "),
-        paste("p-Value:", ifelse(x$bh.pval <= 1e-12, paste(c("<", x$bh.pval), collapse = ""), round(x$bh.pval, 4)), collapse = " ")),
+        paste(c("p-Value:", x$bh.pval),
+              collapse = " ")),
       sep = "\n")
 }
 

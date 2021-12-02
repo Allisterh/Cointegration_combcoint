@@ -21,7 +21,7 @@ summary.bhtest <- function(object, ...) {
         paste(c("Value of the Bayer Hanck Test statistic:", round(object$bh.test, 4)),
               collapse = " ")),
       sep = "\n")
-  cat(ifelse(object$bh.pval <= 1e-12, paste(c("p-Value: <", object$bh.pval), collapse = ""), paste(c("p-Value:", round(object$bh.pval, 4)), collapse = " ")),
+  cat(paste(c("p-Value:", object$bh.pval), collapse = " "),
       sep = "\n")
   out <- list(bh.test = object$bh.test)
   class(out) <- c("summary.bh.test")
