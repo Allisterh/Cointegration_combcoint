@@ -1,10 +1,10 @@
-Package: bayerhanck
+Package: combcoint
 Title: A Joint Test-Statistic for the Null of Non-Cointegration
 Version: 0.0.0.9000
 Authors@R: c(
 	person("Janine", "Langerbein", email = "janine.langerbein@icloud.com", role = c("aut", "cre")),
 	person("Jens", "Klenke", email = "jens-klenke@hotmail.de", role = c("aut")))
-Description: bayerhanck produces a joint test-statistic for the null of non-cointegration based on Engle-Granger, Johansen maximum eigenvalue, Boswijk and Banerjee tests. Also see Bayer, Christian and Christoph Hanck: "Combining Non-Cointegration tests", METEOR RM 09/012, University of Maastricht.
+Description: combcoint produces a joint test-statistic for the null of non-cointegration based on Engle-Granger, Johansen maximum eigenvalue, Boswijk and Banerjee tests. Also see Bayer, Christian and Christoph Hanck: "Combining Non-Cointegration tests", Journal of Time Series Analysis, 34(1), 83–95. https://doi.org/10.1111/j.1467-9892.2012.00814.x
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

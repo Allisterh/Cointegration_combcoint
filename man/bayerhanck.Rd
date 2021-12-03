@@ -30,7 +30,7 @@ An object of class \code{"bhtest"} is a \code{"list"} containing, inter alia, th
 
 \item{bh.test}{the test statistic of the Bayer Hanck Test}
 \item{bh.pval}{the p-Value of the Bayer Hanck Test}
-\item{test.stat}{the test statistic of the underlying tests}
+\item{test.stat}{the test statistics of the underlying tests}
 \item{pval.stat}{the p-values of the underlying tests}
 }
 \description{
@@ -40,7 +40,9 @@ various cointegration tests.
 \examples{
 data("mts-examples", package="MTS")
 bayerhanck(sp ~ ibm + ko, data = ibmspko)
+R Version
+
 }
 \references{
-Bayer, C. and Hanck, C. (2009), Combining Non-Cointegration tests, METEOR RM 09/012, University of Maastricht.
+Bayer, C. and Hanck, C. (2013). Combining non-cointegration tests. \emph{Journal of Time Series Analysis}, 34(1), 83 -- 95. https://doi.org/10.1111/j.1467-9892.2012.00814.x
 }
