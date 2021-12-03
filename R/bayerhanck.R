@@ -21,7 +21,7 @@
 #'
 #'\item{bh.test}{the test statistic of the Bayer Hanck Test}
 #'\item{bh.pval}{the p-Value of the Bayer Hanck Test}
-#'\item{test.stat}{the test statistic of the underlying tests}
+#'\item{test.stat}{the test statistics of the underlying tests}
 #'\item{pval.stat}{the p-values of the underlying tests}
 #'
 #'
