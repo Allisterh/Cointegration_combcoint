@@ -32,8 +32,6 @@
 #' @examples
 #' data("mts-examples", package="MTS")
 #' bayerhanck(sp ~ ibm + ko, data = ibmspko)
-#' R Version
-#'
 bayerhanck <- function(formula, data, lags = 1, trend = "const", test = "all") {
 
 

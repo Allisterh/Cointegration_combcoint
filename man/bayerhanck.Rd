@@ -40,8 +40,6 @@ various cointegration tests.
 \examples{
 data("mts-examples", package="MTS")
 bayerhanck(sp ~ ibm + ko, data = ibmspko)
-R Version
-
 }
 \references{
 Bayer, C. and Hanck, C. (2013). Combining non-cointegration tests. \emph{Journal of Time Series Analysis}, 34(1), 83 -- 95. https://doi.org/10.1111/j.1467-9892.2012.00814.x
