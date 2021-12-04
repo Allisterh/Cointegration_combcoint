@@ -13,34 +13,34 @@ knitr::opts_chunk$set(
 )
 ```
 
-# bayerhanck
+# combcoint
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/jens-klenke/combcoint/workflows/R-CMD-check/badge.svg)](https://github.com/jens-klenke/combcoint/actions)
 <!-- badges: end -->
 
-The goal of bayerhanck is to ...
+The goal of combcoint is to ...
 
 ## Installation
 
-You can install the released version of bayerhanck from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of combcoint from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("bayerhanck")
+install.packages("combcoint")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jens-klenke/cointegration_intern")
+devtools::install_github("jens-klenke/combcoint")
 ```
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(bayerhanck)
+library(combcoint)
 ## basic example code
 ```
 
