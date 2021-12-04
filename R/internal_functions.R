@@ -63,7 +63,7 @@ get_p_value <- function(bh.test, trendtype, test.type, k, ...){
     data %>%
       dplyr::filter(case == case_w,
                     test.type == test_w) %>%
-      dplyr::select(all_of(art)) %>%
+      dplyr::select(dplyr::all_of(art)) %>%
       dplyr::pull()
   }
 
