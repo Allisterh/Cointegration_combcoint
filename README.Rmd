@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # bayerhanck
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/jens-klenke/combcoint/workflows/R-CMD-check/badge.svg)](https://github.com/jens-klenke/combcoint/actions)
 <!-- badges: end -->
 
 The goal of bayerhanck is to ...
