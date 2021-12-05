@@ -72,3 +72,9 @@ Mechanism Tests for Cointegration in a Single-equation Framework,
 Engle, R. and Granger, C. (1987), Co-integration and Error Correction:
 Representation, Estimation, and Testing, *Econometrica* 55(2), 251-76.
 <https://doi.org/10.2307/1913236>
+
+------------------------------------------------------------------------
+
+Please note that this project is released with a Contributor Code of
+Conduct. By participating in this project you agree to abide by its
+terms.
