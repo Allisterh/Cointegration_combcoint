@@ -52,6 +52,8 @@ First install the package as described above
 ```{r, message = FALSE, eval = FALSE}
 library(combcoint)
 
+combcoint::bayerhanck(sp ~ ibm + ko, data = ibmspko)
+
 ```
 
 
@@ -65,3 +67,5 @@ Boswijk, H. P. (1994), Testing for an unstable root in conditional and structura
 Johansen, S. (1988), Statistical analysis of cointegration vectors, _Journal of Economic Dynamics and Control_ 12(2-3), 231-254. [https://www.sciencedirect.com/science/article/abs/pii/0165188988900413](https://www.sciencedirect.com/science/article/abs/pii/0165188988900413)
 
 Banerjee, A., Dolado, J. J. and Mestre, R. (1998), Error-correction Mechanism Tests for Cointegration in a Single-equation Framework, _Journal of Times Series Analysis_ 19(3), 267-283. [https://doi.org/10.1111/1467-9892.00091](https://doi.org/10.1111/1467-9892.00091)
+
+Engle, R. and Granger, C. (1987), Co-integration and Error Correction: Representation, Estimation, and Testing, _Econometrica_ 55(2), 251-76. [https://doi.org/10.2307/1913236](https://doi.org/10.2307/1913236)

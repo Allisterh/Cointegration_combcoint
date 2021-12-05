@@ -45,6 +45,8 @@ First install the package as described above
 
 ``` r
 library(combcoint)
+
+combcoint::bayerhanck(sp ~ ibm + ko, data = ibmspko)
 ```
 
 ## Reference
@@ -66,3 +68,7 @@ Banerjee, A., Dolado, J. J. and Mestre, R. (1998), Error-correction
 Mechanism Tests for Cointegration in a Single-equation Framework,
 *Journal of Times Series Analysis* 19(3), 267-283.
 <https://doi.org/10.1111/1467-9892.00091>
+
+Engle, R. and Granger, C. (1987), Co-integration and Error Correction:
+Representation, Estimation, and Testing, *Econometrica* 55(2), 251-76.
+<https://doi.org/10.2307/1913236>
