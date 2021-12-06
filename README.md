@@ -16,10 +16,19 @@ cointegration tests are implemented:
 
 -   `bayerhanck()` to perform the *Combining non-cointegration test*
     which is implemented in two different versions.
--   `boswijk()` to perform the Boswijk cointegration test
--   `banerjee()` to perform the Banerjee cointregration test
--   `englegraner()` to perform the Engel-Granger cointregration test
--   `johansen()` to perform the Johansen cointregration test
+-   `boswijk()` performs the structural error correction model
+    cointegration test by Boswijk
+    [(1994)](https://doi.org/10.1016/0304-4076(93)01560-9)
+-   `banerjee()` performs the error-correction-based cointregration test
+    by Banerjee [(1998)](https://doi.org/10.1111/1467-9892.00091)
+-   `englegraner()` performs the residual-based cointregration test by
+    Engle and Granger [(1987)](https://doi.org/10.2307/1913236) and is a
+    wrapper for the `ur.df` of the `urca` package
+-   `johansen()` performs the system-based maximum likelihood
+    cointegration test by Johansen
+    [(1988)](https://doi.org/10.1016/0165-1889(88)90041-3) and is a
+    wrapper function for the `rank.test` of the `tsDyn` package. Note
+    that first the transformation to a VECM is needed.
 
 ## Installation
 
