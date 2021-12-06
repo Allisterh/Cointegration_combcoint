@@ -21,12 +21,13 @@ knitr::opts_chunk$set(
 
 ## Overview 
 
-`combcoint` is package which provides, among other things, the _Combining non-cointegration tests_ of Bayer and Hanck. The following cointegration tests are implemented:
+`combcoint` is an `R` package which provides, among other things, the _combined non-cointegration tests_ of Bayer and Hanck. The following cointegration tests are implemented:
 
-* `bayerhanck()` to perform the _Combining non-cointegration test_ which is implemented in two different versions, see the help file, with the command `?bayerhnack()` for more information
+* `bayerhanck()` to perform the _Combining non-cointegration test_ which is implemented in two different versions.
 * `boswijk()` to perform the Boswijk cointegration test
-* `banerjee()` to perform the banerjee cointregration test
-
+* `banerjee()` to perform the Banerjee cointregration test
+* `englegraner()` to perform the Engel-Granger cointregration test
+* `johansen()` to perform the Johansen cointregration test
 
 ## Installation
 
@@ -50,9 +51,20 @@ devtools::install_github("jens-klenke/combcoint")
 First install the package as described above
 
 ```{r, message = FALSE, eval = FALSE}
-library(combcoint)
 
-combcoint::bayerhanck(sp ~ ibm + ko, data = ibmspko)
+# example data from the MTS package 
+data("mts-examples", package = "MTS")
+
+bayerhanck(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const", test = "all")
+
+banerjee(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const")
+
+boswijk(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const")
+
+englegranger(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const")
+
+johansen(sp ~ ibm + ko, data = ibmspko, type = "eigen", lags = 1, trend = "const")
+
 
 ```
 
@@ -62,9 +74,9 @@ combcoint::bayerhanck(sp ~ ibm + ko, data = ibmspko)
 Bayer, C. and Hanck, C. (2013). Combining non-cointegration tests. _Journal of Time Series Analysis_, 34(1), 83 -- 95. [https://doi.org/10.1111/j.1467-9892.2012.00814.x](https://doi.org/10.1111/j.1467-9892.2012.00814.x)
 
 Boswijk, H. P. (1994), Testing for an unstable root in conditional and structural error correction models, _Journal of Econometrics_ 63(1), 37-60.
-[https://www.sciencedirect.com/science/article/abs/pii/0304407693015609](https://www.sciencedirect.com/science/article/abs/pii/0304407693015609)
+[https://doi.org/10.1016/0304-4076(93)01560-9](https://doi.org/10.1016/0304-4076(93)01560-9)
 
-Johansen, S. (1988), Statistical analysis of cointegration vectors, _Journal of Economic Dynamics and Control_ 12(2-3), 231-254. [https://www.sciencedirect.com/science/article/abs/pii/0165188988900413](https://www.sciencedirect.com/science/article/abs/pii/0165188988900413)
+Johansen, S. (1988), Statistical analysis of cointegration vectors, _Journal of Economic Dynamics and Control_ 12(2-3), 231-254. [https://doi.org/10.1016/0165-1889(88)90041-3](https://doi.org/10.1016/0165-1889(88)90041-3)
 
 Banerjee, A., Dolado, J. J. and Mestre, R. (1998), Error-correction Mechanism Tests for Cointegration in a Single-equation Framework, _Journal of Times Series Analysis_ 19(3), 267-283. [https://doi.org/10.1111/1467-9892.00091](https://doi.org/10.1111/1467-9892.00091)
 
@@ -73,4 +85,4 @@ Engle, R. and Granger, C. (1987), Co-integration and Error Correction: Represent
 
 ---
 
-Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
+Please note that this project and package is licensed under the [MIT](https://github.com/jens-klenke/combcoint/blob/master/LICENSE.md) license. 

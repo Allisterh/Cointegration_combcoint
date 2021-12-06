@@ -10,15 +10,16 @@
 
 ## Overview
 
-`combcoint` is package which provides, among other things, the
-*Combining non-cointegration tests* of Bayer and Hanck. The following
+`combcoint` is an `R` package which provides, among other things, the
+*combined non-cointegration tests* of Bayer and Hanck. The following
 cointegration tests are implemented:
 
 -   `bayerhanck()` to perform the *Combining non-cointegration test*
-    which is implemented in two different versions, see the help file,
-    with the command `?bayerhnack()` for more information
+    which is implemented in two different versions.
 -   `boswijk()` to perform the Boswijk cointegration test
--   `banerjee()` to perform the banerjee cointregration test
+-   `banerjee()` to perform the Banerjee cointregration test
+-   `englegraner()` to perform the Engel-Granger cointregration test
+-   `johansen()` to perform the Johansen cointregration test
 
 ## Installation
 
@@ -44,9 +45,18 @@ devtools::install_github("jens-klenke/combcoint")
 First install the package as described above
 
 ``` r
-library(combcoint)
+# example data from the MTS package 
+data("mts-examples", package = "MTS")
 
-combcoint::bayerhanck(sp ~ ibm + ko, data = ibmspko)
+bayerhanck(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const", test = "all")
+
+banerjee(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const")
+
+boswijk(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const")
+
+englegranger(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const")
+
+johansen(sp ~ ibm + ko, data = ibmspko, type = "eigen", lags = 1, trend = "const")
 ```
 
 ## Reference
@@ -57,12 +67,11 @@ Bayer, C. and Hanck, C. (2013). Combining non-cointegration tests.
 
 Boswijk, H. P. (1994), Testing for an unstable root in conditional and
 structural error correction models, *Journal of Econometrics* 63(1),
-37-60.
-<https://www.sciencedirect.com/science/article/abs/pii/0304407693015609>
+37-60. <https://doi.org/10.1016/0304-4076(93)01560-9>
 
 Johansen, S. (1988), Statistical analysis of cointegration vectors,
 *Journal of Economic Dynamics and Control* 12(2-3), 231-254.
-<https://www.sciencedirect.com/science/article/abs/pii/0165188988900413>
+<https://doi.org/10.1016/0165-1889(88)90041-3>
 
 Banerjee, A., Dolado, J. J. and Mestre, R. (1998), Error-correction
 Mechanism Tests for Cointegration in a Single-equation Framework,
@@ -75,6 +84,6 @@ Representation, Estimation, and Testing, *Econometrica* 55(2), 251-76.
 
 ------------------------------------------------------------------------
 
-Please note that this project is released with a Contributor Code of
-Conduct. By participating in this project you agree to abide by its
-terms.
+Please note that this project and package is licensed under the
+[MIT](https://github.com/jens-klenke/combcoint/blob/master/LICENSE.md)
+license.
