@@ -24,8 +24,10 @@ A data frame with 92 rows and 10 variables:
 data(lutkepohl_e1)
 }
 \description{
-The data was retrieved from the E1 file of Luetkepohl (2007) and contains quarterly, seasonally adjusted data for fixed investment, disposable income, and consumption expenditures in billions of DM (Deutsche Mark, West German currency before the Euro) from the first quarter of 1960 till the fourth quarter of 1982 for West German.
- The raw data is available at \url{http://www.jmulti.de/download/datasets/e1.dat}.
+The data was retrieved from the E1 file of Luetkepohl (2007) and contains quarterly, seasonally adjusted data
+for fixed investment, disposable income, and consumption expenditures in billions of DM (Deutsche Mark, West German currency before the Euro)
+from the first quarter of 1960 until the fourth quarter of 1982 for West Germany.
+The raw data is available at \url{http://www.jmulti.de/download/datasets/e1.dat}.
 }
 \references{
 Luetkepohl, (2006). \emph{New introduction to multiple time series analysis} (2nd ed.). Berlin: Springer.

@@ -44,8 +44,17 @@ Executes common cointegration tests, which serve as underlying tests for the Bay
 }}
 
 \examples{
+# Luetkepohl (2007): Economic data from West Germany
+data(lutkepohl_e1)
+englegranger(linvestment ~ lincome + lconsumption, data = lutkepohl_e1)
+
+# World Almanac and Book of Facts (1975): Monthly simple returns of the stocks of IBM,
+# Coca Cola and S&P Composite index
 data("mts-examples", package="MTS")
 englegranger(sp ~ ibm + ko, data = ibmspko)
+
+
+
 }
 \references{
 Engle, R. and Granger, C. (1987), Co-integration and Error Correction: Representation, Estimation, and Testing, Econometrica 55(2), 251-76.

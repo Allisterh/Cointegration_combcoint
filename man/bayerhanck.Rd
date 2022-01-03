@@ -38,12 +38,13 @@ Produces a joint test-statistic for the null of non-cointegration, aggregating
 various cointegration tests.
 }
 \examples{
-
+# Luetkepohl (2007): Economic data from West Germany
 data(lutkepohl_e1)
 bayerhanck(linvestment ~ lincome + lconsumption, data = lutkepohl_e1)
-
 bayerhanck(linvestment ~ lincome + lconsumption, data = lutkepohl_e1, lags = 4)
 
+# World Almanac and Book of Facts (1975): Monthly simple returns of the stocks of IBM,
+# Coca Cola and S&P Composite index
 data("mts-examples", package="MTS")
 bayerhanck(sp ~ ibm + ko, data = ibmspko)
 

@@ -21,8 +21,17 @@
 #' Boswijk, H. P. (1994), Testing for an unstable root in conditional and structural error correction models, Journal of Econometrics 63(1), 37-60.
 #'
 #' @examples
+#' # Luetkepohl (2007): Economic data from West Germany
+#' data(lutkepohl_e1)
+#' englegranger(linvestment ~ lincome + lconsumption, data = lutkepohl_e1)
+#'
+#' # World Almanac and Book of Facts (1975): Monthly simple returns of the stocks of IBM,
+#' # Coca Cola and S&P Composite index
 #' data("mts-examples", package="MTS")
 #' englegranger(sp ~ ibm + ko, data = ibmspko)
+#'
+#'
+#'
 englegranger <- function(formula, data, lags = 1, trend = "const"){
 
   # ---- Check Syntax ----

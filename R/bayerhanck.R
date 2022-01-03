@@ -30,12 +30,13 @@
 #' @references Bayer, C. and Hanck, C. (2013). Combining non-cointegration tests. \emph{Journal of Time Series Analysis}, 34(1), 83 -- 95. https://doi.org/10.1111/j.1467-9892.2012.00814.x
 #'
 #' @examples
-#'
+#' # Luetkepohl (2007): Economic data from West Germany
 #' data(lutkepohl_e1)
 #' bayerhanck(linvestment ~ lincome + lconsumption, data = lutkepohl_e1)
-#'
 #' bayerhanck(linvestment ~ lincome + lconsumption, data = lutkepohl_e1, lags = 4)
 #'
+#' # World Almanac and Book of Facts (1975): Monthly simple returns of the stocks of IBM,
+#' # Coca Cola and S&P Composite index
 #' data("mts-examples", package="MTS")
 #' bayerhanck(sp ~ ibm + ko, data = ibmspko)
 #'
