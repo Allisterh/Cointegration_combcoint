@@ -28,10 +28,10 @@ for the underlying tests, as well as the test statistic and p-value for the Baye
 
 An object of class \code{"bhtest"} is a \code{"list"} containing, inter alia, the components:
 
-\item{bh.test}{the test statistic of the Bayer Hanck Test}
-\item{bh.pval}{the p-Value of the Bayer Hanck Test}
-\item{test.stat}{the test statistics of the underlying tests}
-\item{pval.stat}{the p-values of the underlying tests}
+\item{bh.test}{the test statistic of the Bayer Hanck Test.}
+\item{bh.pval}{the p-Value of the Bayer Hanck Test.}
+\item{test.stat}{the test statistics of the underlying tests.}
+\item{pval.stat}{the p-values of the underlying tests.}
 }
 \description{
 Produces a joint test-statistic for the null of non-cointegration, aggregating
