@@ -21,7 +21,7 @@ cointegration tests are implemented:
     [(1994)](https://doi.org/10.1016/0304-4076(93)01560-9)
 -   `banerjee()` performs the error-correction-based cointregration test
     by Banerjee [(1998)](https://doi.org/10.1111/1467-9892.00091)
--   `englegraner()` performs the residual-based cointregration test by
+-   `englegranger()` performs the residual-based cointregration test by
     Engle and Granger [(1987)](https://doi.org/10.2307/1913236) and is a
     wrapper for the `ur.df` of the `urca` package
 -   `johansen()` performs the system-based maximum likelihood
