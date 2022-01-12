@@ -63,7 +63,7 @@ get_p_value <- function(bh.test, trendtype, test.type, k, ...){
     data %>%
       dplyr::filter(case == case_w,
                     test.type == test_w) %>%
-      dplyr::select(all_of(art)) %>%
+      dplyr::select(dplyr::all_of(art)) %>%
       dplyr::pull()
   }
 
@@ -121,6 +121,10 @@ get_p_value <- function(bh.test, trendtype, test.type, k, ...){
 
     p.value <- ifelse(p.value_trans >= 1, 9.9999e-1, ifelse(p.value_trans <= 0, 1e-12, p.value_trans))
   }
+
+  p.value <- ifelse(p.value <= 1e-12, paste(c("<", 1e-12), collapse = " "),
+                    ifelse(p.value <= 1e-4, format(p.value, scientific = TRUE, digits = 4),
+                           format(round(p.value, 4), scientific = FALSE)))
 
   return(p.value)
 }

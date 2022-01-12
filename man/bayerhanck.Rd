@@ -28,19 +28,29 @@ for the underlying tests, as well as the test statistic and p-value for the Baye
 
 An object of class \code{"bhtest"} is a \code{"list"} containing, inter alia, the components:
 
-\item{bh.test}{the test statistic of the Bayer Hanck Test}
-\item{bh.pval}{the p-Value of the Bayer Hanck Test}
-\item{test.stat}{the test statistic of the underlying tests}
-\item{pval.stat}{the p-values of the underlying tests}
+\item{bh.test}{the test statistic of the Bayer Hanck Test.}
+\item{bh.pval}{the p-Value of the Bayer Hanck Test.}
+\item{test.stat}{the test statistics of the underlying tests.}
+\item{pval.stat}{the p-values of the underlying tests.}
 }
 \description{
 Produces a joint test-statistic for the null of non-cointegration, aggregating
 various cointegration tests.
 }
 \examples{
+# Luetkepohl (2007): Economic data from West Germany
+data(lutkepohl_e1)
+bayerhanck(linvestment ~ lincome + lconsumption, data = lutkepohl_e1)
+bayerhanck(linvestment ~ lincome + lconsumption, data = lutkepohl_e1, lags = 4)
+
+# World Almanac and Book of Facts (1975): Monthly simple returns of the stocks of IBM,
+# Coca Cola and S&P Composite index
 data("mts-examples", package="MTS")
 bayerhanck(sp ~ ibm + ko, data = ibmspko)
+
+
+
 }
 \references{
-Bayer, C. and Hanck, C. (2009), Combining Non-Cointegration tests, METEOR RM 09/012, University of Maastricht.
+Bayer, C. and Hanck, C. (2013). Combining non-cointegration tests. \emph{Journal of Time Series Analysis}, 34(1), 83 -- 95. https://doi.org/10.1111/j.1467-9892.2012.00814.x
 }

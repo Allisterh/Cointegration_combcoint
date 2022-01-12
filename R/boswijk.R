@@ -21,8 +21,6 @@ boswijk <- function(formula, data, lags = 1, trend = "const"){
   if (lag < 0)
     stop("Lags must be set to a non negative value.")
 
-
-
   # ---- Lag Matrix ----
   Xlag <- cbind(y, x)
   Y_dif <- diff(y) # muss als numeric vorliegen

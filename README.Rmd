@@ -13,48 +13,76 @@ knitr::opts_chunk$set(
 )
 ```
 
-# bayerhanck
+# combcoint
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/jens-klenke/combcoint/workflows/R-CMD-check/badge.svg)](https://github.com/jens-klenke/combcoint/actions)
 <!-- badges: end -->
 
-The goal of bayerhanck is to ...
+## Overview 
+
+`combcoint` is an `R` package which provides, among other things, the _combined non-cointegration tests_ of Bayer and Hanck. The following cointegration tests are implemented:
+
+* `bayerhanck()` to perform the _Combining non-cointegration test_ which is implemented in two different versions.
+* `boswijk()` performs the structural error correction model cointegration test by Boswijk [(1994)](https://doi.org/10.1016/0304-4076(93)01560-9) 
+* `banerjee()` performs the error-correction-based cointregration test by Banerjee [(1998)](https://doi.org/10.1111/1467-9892.00091) 
+* `englegranger()` performs the residual-based cointregration test by Engle and Granger [(1987)](https://doi.org/10.2307/1913236) and is a wrapper for the `ur.df` of the `urca` package
+* `johansen()` performs the system-based maximum likelihood cointegration test by Johansen [(1988)](https://doi.org/10.1016/0165-1889(88)90041-3) and is a wrapper function for the `rank.test` of the `tsDyn` package. Note that first the transformation to a VECM is needed.   
 
 ## Installation
 
-You can install the released version of bayerhanck from [CRAN](https://CRAN.R-project.org) with:
+<!--
+You can install the released version of combcoint from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
-install.packages("bayerhanck")
+```{r eval = FALSE}
+install.packages("combcoint")
 ```
+-->
 
-And the development version from [GitHub](https://github.com/) with:
+The development version can be downloaded from [GitHub](https://github.com/jens-klenke/combcoint) with:
 
-``` r
+```{r eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("jens-klenke/cointegration_intern")
-```
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(bayerhanck)
-## basic example code
+devtools::install_github("jens-klenke/combcoint")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Usage
 
-```{r cars}
-summary(cars)
+First install the package as described above
+
+```{r, message = FALSE, eval = FALSE}
+
+# example data from the MTS package 
+data("mts-examples", package = "MTS")
+
+bayerhanck(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const", test = "all")
+
+banerjee(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const")
+
+boswijk(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const")
+
+englegranger(sp ~ ibm + ko, data = ibmspko, lags = 1, trend = "const")
+
+johansen(sp ~ ibm + ko, data = ibmspko, type = "eigen", lags = 1, trend = "const")
+
+
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
 
-You can also embed plots, for example:
+## Reference 
 
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
+Bayer, C. and Hanck, C. (2013). Combining non-cointegration tests. _Journal of Time Series Analysis_, 34(1), 83 -- 95. [https://doi.org/10.1111/j.1467-9892.2012.00814.x](https://doi.org/10.1111/j.1467-9892.2012.00814.x)
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+Boswijk, H. P. (1994), Testing for an unstable root in conditional and structural error correction models, _Journal of Econometrics_ 63(1), 37-60.
+[https://doi.org/10.1016/0304-4076(93)01560-9](https://doi.org/10.1016/0304-4076(93)01560-9)
+
+Johansen, S. (1988), Statistical analysis of cointegration vectors, _Journal of Economic Dynamics and Control_ 12(2-3), 231-254. [https://doi.org/10.1016/0165-1889(88)90041-3](https://doi.org/10.1016/0165-1889(88)90041-3)
+
+Banerjee, A., Dolado, J. J. and Mestre, R. (1998), Error-correction Mechanism Tests for Cointegration in a Single-equation Framework, _Journal of Times Series Analysis_ 19(3), 267-283. [https://doi.org/10.1111/1467-9892.00091](https://doi.org/10.1111/1467-9892.00091)
+
+Engle, R. and Granger, C. (1987), Co-integration and Error Correction: Representation, Estimation, and Testing, _Econometrica_ 55(2), 251-76. [https://doi.org/10.2307/1913236](https://doi.org/10.2307/1913236)
+
+
+---
+
+Please note that this project and package is licensed under the [MIT](https://github.com/jens-klenke/combcoint/blob/master/LICENSE.md) license. 

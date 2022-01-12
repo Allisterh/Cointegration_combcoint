@@ -12,3 +12,6 @@
 #' @param rhs A function call using the magrittr semantics.
 #' @return The result of calling `rhs(lhs)`.
 NULL
+
+# Set global Variables
+utils::globalVariables(c("case", "critical", "coef", "terms"))
